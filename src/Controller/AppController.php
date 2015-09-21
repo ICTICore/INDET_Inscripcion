@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -12,13 +13,13 @@
  * @since     0.2.9
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
 use Cake\Controller\Controller;
 use \Ceeram\Blame\Controller\BlameTrait;
 use Cake\Network\Exception\NotFoundException;
-
-
+use Cake\Event\Event;
 
 /**
  * Application Controller
@@ -28,12 +29,21 @@ use Cake\Network\Exception\NotFoundException;
  *
  * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller
-{
+class AppController extends Controller {
+
     /**
      * Traits
      */
     use BlameTrait;
+
+    public function beforeRender(Event $event) {
+        $nombre_usuario = "";
+        if (isset($_SESSION['Auth']['User'])) {
+            $usuario = $_SESSION['Auth']['User'];
+            $nombre_usuario = $usuario['first_name'] . ' ' . $usuario['last_name'];            
+        }
+        $this->set('nombre_usuario', $nombre_usuario);
+    }
 
     /**
      * Initialization hook method.
@@ -42,51 +52,49 @@ class AppController extends Controller
      *
      * @return void
      */
-    public function initialize()
-    {
+    public function initialize() {
         $this->loadComponent('Auth', [
-                'loginAction' => [
-                    'controller' => 'Users',
-                    'action' => 'login'
-                ],
-                'loginRedirect' => [
-                    'controller' => 'Users',
-                    'action' => 'index'
-                ],
-                'authError' => 'No tienes permiso para acceder a esa sección',
-                'authenticate' => [
-                    'Form' => [
-                        'fields' => [
-                            'username' => 'email',
-                            'password' => 'password'
-                        ],
-                        'scope' => ['Users.active' => true],
-                        'contain' => ['Roles']
-                    ]
-                ],
-                'authorize' => [
-                    'TinyAuth.Tiny' => [
-                        'roleColumn' => 'role_id',
-                        'rolesTable' => 'Roles',
-                        'multiRole' => true,
-                        'pivotTable' => 'roles_users',
-                        'superAdminRole' => null,
-                        'authorizeByPrefix' => false,
-                        'prefixes' => [],
-                        'allowUser' => false,
-                        'adminPrefix' => null,
-                        'autoClearCache' => true
-                    ]
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            'loginRedirect' => [
+                'controller' => 'Users',
+                'action' => 'index'
+            ],
+            'authError' => 'No tienes permiso para acceder a esa sección',
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ],
+                    'scope' => ['Users.active' => true],
+                    'contain' => ['Roles']
+                ]
+            ],
+            'authorize' => [
+                'TinyAuth.Tiny' => [
+                    'roleColumn' => 'role_id',
+                    'rolesTable' => 'Roles',
+                    'multiRole' => true,
+                    'pivotTable' => 'roles_users',
+                    'superAdminRole' => null,
+                    'authorizeByPrefix' => false,
+                    'prefixes' => [],
+                    'allowUser' => false,
+                    'adminPrefix' => null,
+                    'autoClearCache' => true
                 ]
             ]
+                ]
         );
         $this->loadComponent('Flash');
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Search.Prg');
         $this->loadComponent('Security');
     }
-    
-    
+
     public function generateRandomString($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -96,4 +104,5 @@ class AppController extends Controller
         }
         return $randomString;
     }
+
 }

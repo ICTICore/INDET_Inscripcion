@@ -25,6 +25,44 @@ class UsersController extends AppController {
 
         $this->Auth->allow(['login', 'logout']);
     }
+    
+        
+    /**
+     * Instrucciones method
+     *
+     * @return void Redirects on successful add, renders view otherwise.
+     */
+     public function instrucciones($id = null) {
+        $user = $this->Users->get($id);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            return $this->redirect(['action' => 'edit',$id]);
+        }
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
+    }
+    
+    /**
+     * Confirmar method
+     *
+     * @return void Redirects on successful add, renders view otherwise.
+     */
+     public function confirmar($id = null) {
+        $user = $this->Users->get($id);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            if ($this->Users->save($user)) {
+                $this->Flash->success('Tu confirmación fue realizada con éxito.');
+                return $this->redirect(['action' => 'instrucciones',$id]);
+            } else {
+                $this->Flash->error('Error al realizar tu confirmación. Por favor, intenta de nuevo');
+            }
+        }
+        
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
+    }
+    
+    
 
     /**
      * Invitar method
@@ -49,7 +87,7 @@ class UsersController extends AppController {
                 $last_user_id = $this->Users->find()->select(['id'])->order(['id' => 'DESC'])->first();
                 $mensaje = $datos_correo['mensaje'] .
                         '<br/>' .
-                        Router::url('/', true) . 'Users/Confirmar/' . $last_user_id['id'] .
+                        Router::url('/', true) . 'users/confirmar/' . $last_user_id['id'] .
                         '<br/>' .
                         'Contraseña temporal: <b>' . $pass_temp . '</b>' .
                         '<br/>' .
@@ -71,7 +109,7 @@ class UsersController extends AppController {
                     //echo 'Exception : ', $e->getMessage(), "\n";
                     $this->Flash->error('Ocurrio un error al invitar al usuario. Por favor intenta de nuevo.');
                 }
-                $this->Flash->warning('El usuario fue registrado, pero no se pudo envíar el correo.');
+                $this->Flash->success('El usuario fue registrado, pero no se pudo envíar el correo.');
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error('Ocurrio un error al invitar al usuario. Por favor intenta de nuevo.');

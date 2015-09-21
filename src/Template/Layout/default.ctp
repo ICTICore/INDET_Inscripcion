@@ -35,13 +35,18 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?php echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js', array('inline' => false));?>
 </head>
 <body>
+        
     <header>
         <div class="header-title">
             <span><?= $this->fetch('title') ?></span>
         </div>
-        <div class="header-help">
-            ALGUNOS DATOS
+        <div class="header-help">            
+            <?php if(isset($_SESSION['Auth']['User'])): ?>
+            <b><span><?php echo $nombre_usuario;?></span></b>
+            <span><?php echo $this->Html->link('Salir', ["controller" => "Users","action" => "logout"]);?></span>
+            <?php endif;?>
         </div>
+        
         
     </header>
     <div id="container">
