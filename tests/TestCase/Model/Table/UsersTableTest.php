@@ -17,9 +17,9 @@ class UsersTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'Users' => 'app.users',
-        'Roles' => 'app.roles',
-        'RolesUsers' => 'app.roles_users'
+        'app.users',
+        'app.roles',
+        'app.roles_users'
     ];
 
     /**

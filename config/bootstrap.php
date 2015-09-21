@@ -53,6 +53,7 @@ use Cake\Routing\DispatcherFactory;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
 
+
 /**
  * Read configuration file and inject configuration into various
  * CakePHP classes.
@@ -183,6 +184,7 @@ Plugin::loadAll([
         'Migrations',
         'Ceeram/Blame',
         'Search',
+        'Ajax' => ['bootstrap' => true],
         'TinyAuth' => array('bootstrap' => true)
         ]);
 
@@ -198,3 +200,6 @@ if (Configure::read('debug')) {
 DispatcherFactory::add('Asset');
 DispatcherFactory::add('Routing');
 DispatcherFactory::add('ControllerFactory');
+
+//Archivo de configuración
+Configure::load('Configuracion');

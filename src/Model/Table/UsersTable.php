@@ -7,8 +7,12 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+
 /**
  * Users Model
+ *
+ * @property \Cake\ORM\Association\HasMany $Usuarios
+ * @property \Cake\ORM\Association\BelongsToMany $Roles
  */
 class UsersTable extends Table
 {
@@ -31,9 +35,12 @@ class UsersTable extends Table
      */
     public function initialize(array $config)
     {
+        parent::initialize($config);
+
         $this->table('users');
         $this->displayField('full_name');
         $this->primaryKey('id');
+
         $this->addBehavior('Timestamp');
         $this->addBehavior('Search.Searchable');
         $this->addBehavior('Ceeram/Blame.Blame');
@@ -54,22 +61,38 @@ class UsersTable extends Table
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create')
+            ->allowEmpty('id', 'create');
+
+        $validator
             ->add('active', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('active', 'create')
-            ->notEmpty('active')
+            ->allowEmpty('active');
+
+        $validator
             ->requirePresence('first_name', 'create')
-            ->notEmpty('first_name')
-            ->allowEmpty('middle_name')
+            ->notEmpty('first_name');
+
+        $validator
+            ->allowEmpty('middle_name');
+
+        $validator
             ->requirePresence('last_name', 'create')
-            ->notEmpty('last_name')
+            ->notEmpty('last_name');
+
+        $validator
             ->add('email', 'valid', ['rule' => 'email'])
             ->requirePresence('email', 'create')
             ->notEmpty('email')
+            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
             ->requirePresence('password', 'create')
-            ->notEmpty('password')
+            ->notEmpty('password');
+
+        $validator
             ->add('created_by', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('created_by')
+            ->allowEmpty('created_by');
+
+        $validator
             ->add('modified_by', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('modified_by');
 

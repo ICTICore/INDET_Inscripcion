@@ -12,7 +12,8 @@
         "cakephp/plugin-installer": "*",
         "ceeram/cakephp-blame": "dev-master",
         "dereuromark/cakephp-tinyauth": "dev-master",
-        "cakedc/search": "~3.0"
+        "cakedc/search": "~3.0",
+        "dereuromark/cakephp-ajax": "dev-master"
     },
     "require-dev": {
         "psy/psysh": "@stable",

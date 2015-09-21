@@ -41,6 +41,7 @@ use Cake\Routing\Router;
  */
 Router::defaultRouteClass('Route');
 
+
 Router::scope('/', function ($routes) {
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
@@ -81,3 +82,4 @@ Router::scope('/', function ($routes) {
  * how to customize the loading of plugin routes.
  */
 Plugin::routes();
+Router::extensions(['json', 'xml']);

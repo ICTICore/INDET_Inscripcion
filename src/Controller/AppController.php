@@ -16,6 +16,9 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use \Ceeram\Blame\Controller\BlameTrait;
+use Cake\Network\Exception\NotFoundException;
+
+
 
 /**
  * Application Controller
@@ -81,5 +84,16 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Search.Prg');
         $this->loadComponent('Security');
+    }
+    
+    
+    public function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }

@@ -27,11 +27,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
+    <?= $this->Html->css('indet.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    <?php echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js', array('inline' => false));?>
 </head>
 <body>
     <header>
@@ -39,9 +40,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <span><?= $this->fetch('title') ?></span>
         </div>
         <div class="header-help">
-            <span><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></span>
-            <span><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></span>
+            ALGUNOS DATOS
         </div>
+        
     </header>
     <div id="container">
 
