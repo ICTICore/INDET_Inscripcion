@@ -5,6 +5,8 @@
         <li><?= $this->Form->postLink(__('Delete Dato Personal'), ['action' => 'delete', $datoPersonal->id], ['confirm' => __('Are you sure you want to delete # {0}?', $datoPersonal->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Dato Personals'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Dato Personal'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Usuarios'), ['controller' => 'Usuarios', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Usuario'), ['controller' => 'Usuarios', 'action' => 'add']) ?> </li>
     </ul>
@@ -13,6 +15,8 @@
     <h2><?= h($datoPersonal->id) ?></h2>
     <div class="row">
         <div class="large-5 columns strings">
+            <h6 class="subheader"><?= __('User') ?></h6>
+            <p><?= $datoPersonal->has('user') ? $this->Html->link($datoPersonal->user->full_name, ['controller' => 'Users', 'action' => 'view', $datoPersonal->user->id]) : '' ?></p>
             <h6 class="subheader"><?= __('Rfc') ?></h6>
             <p><?= h($datoPersonal->rfc) ?></p>
             <h6 class="subheader"><?= __('Nombre') ?></h6>
@@ -70,7 +74,7 @@
         </div>
     </div>
 </div>
-<div class="related row">
+<div class="related">
     <div class="column large-12">
     <h4 class="subheader"><?= __('Related Usuarios') ?></h4>
     <?php if (!empty($datoPersonal->usuarios)): ?>

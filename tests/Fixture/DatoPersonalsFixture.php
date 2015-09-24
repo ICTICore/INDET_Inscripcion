@@ -18,6 +18,7 @@ class DatoPersonalsFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
+        'user_id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'rfc' => ['type' => 'string', 'length' => 20, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'nombre' => ['type' => 'string', 'length' => 50, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'a_paterno' => ['type' => 'string', 'length' => 50, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
@@ -61,6 +62,7 @@ class DatoPersonalsFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
+            'user_id' => 1,
             'rfc' => 'Lorem ipsum dolor ',
             'nombre' => 'Lorem ipsum dolor sit amet',
             'a_paterno' => 'Lorem ipsum dolor sit amet',
@@ -68,7 +70,7 @@ class DatoPersonalsFixture extends TestFixture
             'genero' => 'Lorem ipsum dolor sit amet',
             'telefono_1' => 'Lorem ipsum dolor sit amet',
             'telefono_2' => 'Lorem ipsum dolor sit amet',
-            'fecha_nacimiento' => '2015-09-09',
+            'fecha_nacimiento' => '2015-09-21',
             'email' => 'Lorem ipsum dolor sit amet',
             'codigo_postal' => 'Lorem ip',
             'estado' => 'Lorem ipsum dolor sit amet',
@@ -82,8 +84,8 @@ class DatoPersonalsFixture extends TestFixture
             'alergias' => 'Lorem ipsum dolor sit amet',
             'institucion_seguridad' => 'Lorem ipsum dolor sit amet',
             'numero_afiliacion' => 'Lorem ipsum dolor sit amet',
-            'created' => '2015-09-09 15:25:27',
-            'modified' => '2015-09-09 15:25:27',
+            'created' => '2015-09-21 22:12:29',
+            'modified' => '2015-09-21 22:12:29',
             'fotografia' => 'Lorem ipsum dolor sit amet'
         ],
     ];

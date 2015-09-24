@@ -14,7 +14,7 @@
             echo $this->Form->input('middle_name');
             echo $this->Form->input('email');
             echo $this->Form->input('password');
-            echo $this->Form->input('confirm_password');
+            echo $this->Form->input('confirm_password',['type'=>'password']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Confirmar')) ?>

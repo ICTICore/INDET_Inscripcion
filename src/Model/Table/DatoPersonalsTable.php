@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
 /**
  * DatoPersonals Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\HasMany $Usuarios
  */
 class DatoPersonalsTable extends Table
@@ -31,6 +32,10 @@ class DatoPersonalsTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
+        ]);
         $this->hasMany('Usuarios', [
             'foreignKey' => 'dato_personal_id'
         ]);
@@ -52,6 +57,11 @@ class DatoPersonalsTable extends Table
             ->requirePresence('rfc', 'create')
             ->notEmpty('rfc')
             ->add('rfc', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+        
+        $validator
+            ->requirePresence('curp', 'create')
+            ->notEmpty('curp')
+            ->add('curp', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->requirePresence('nombre', 'create')
@@ -135,6 +145,8 @@ class DatoPersonalsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->isUnique(['curp']));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
     }
 }

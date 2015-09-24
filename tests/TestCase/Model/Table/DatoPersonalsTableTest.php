@@ -18,14 +18,14 @@ class DatoPersonalsTableTest extends TestCase
      */
     public $fixtures = [
         'app.dato_personals',
+        'app.users',
+        'app.roles',
+        'app.roles_users',
         'app.usuarios',
         'app.dato_sindicals',
         'app.dato_laborals',
         'app.estados',
-        'app.municipios',
-        'app.users',
-        'app.roles',
-        'app.roles_users'
+        'app.municipios'
     ];
 
     /**

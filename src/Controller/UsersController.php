@@ -35,7 +35,7 @@ class UsersController extends AppController {
      public function instrucciones($id = null) {
         $user = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            return $this->redirect(['action' => 'edit',$id]);
+            return $this->redirect(['controller'=>'DatoPersonals','action' => 'agregar',$id]);
         }
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);

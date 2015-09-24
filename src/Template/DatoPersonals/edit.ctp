@@ -8,6 +8,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Dato Personals'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Usuarios'), ['controller' => 'Usuarios', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Usuario'), ['controller' => 'Usuarios', 'action' => 'add']) ?></li>
     </ul>
@@ -17,6 +19,7 @@
     <fieldset>
         <legend><?= __('Edit Dato Personal') ?></legend>
         <?php
+            echo $this->Form->input('user_id', ['options' => $users]);
             echo $this->Form->input('rfc');
             echo $this->Form->input('nombre');
             echo $this->Form->input('a_paterno');
