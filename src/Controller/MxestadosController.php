@@ -22,9 +22,9 @@ class MxestadosController extends AppController
      *
      * @return void
      */
-    public function estadosajax($estado_id)
+    public function estadosajax($estado_id,$estado_inicio=null)
     {
-        $this->layout='ajax';
+        $this->viewBuilder()->layout('ajax');
         $this->loadModel('Mxmunicipios');
         $estados_municipios = array();
         $estados_municipios = $this->Mxmunicipios->find()
@@ -32,6 +32,8 @@ class MxestadosController extends AppController
                     ->where(['mxestado_id'=>$estado_id])
                     ->order(['nombre'=>'ASC']);       
         $this->set(compact('estados_municipios'));
+        $this->set('estado_inicio',$estado_inicio);
+        $this->set('_serialize',['estados_municipios']);
         
     }
 }

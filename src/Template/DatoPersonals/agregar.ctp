@@ -36,25 +36,28 @@
     </ul>
 </div>
 <div class="datoPersonals form large-10 medium-9 columns">
-    <?= $this->Form->create($datoPersonal) ?>
+    <?= $this->Form->create($datoPersonal,['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Add Dato Personal') ?></legend>
+        <div id="div-user">
         <?php
-        echo $this->Form->input('DatoPersonal.user_id', ['options' => $users, 'value' => $user_dato['id']]);
         echo $this->Form->input('User.id', ['value' => $user_dato['id']]);
         echo $this->Form->input('User.first_name', ['value' => $user_dato['first_name']]);
         echo $this->Form->input('User.last_name', ['value' => $user_dato['last_name']]);
         echo $this->Form->input('User.middle_name', ['value' => $user_dato['middle_name']]);
         echo $this->Form->input('User.email', ['value' => $user_dato['email']]);
-
-
+        echo $this->Form->input('DatoPersonal.user_id', ['value' => $user_dato['id']]);
+        ?>
+        </div>
+        <?php
+        
         echo $this->Form->input('DatoPersonal.rfc');
         echo $this->Form->input('DatoPersonal.curp');
         echo $this->Form->input('DatoPersonal.nombre', ['value' => $user_dato['first_name']]);
         echo $this->Form->input('DatoPersonal.a_paterno', ['value' => $user_dato['last_name']]);
         echo $this->Form->input('DatoPersonal.a_materno', ['value' => $user_dato['middle_name']]);
 
-        echo $this->Form->input('DatoPersonal.genero');
+        echo $this->Form->input('DatoPersonal.genero',['type'=>'select','options'=>['0'=>'Selecciona una opción','masculino'=>'Masculino','femenino'=>'Femenino']]);
         echo $this->Form->input('DatoPersonal.telefono_1');
         echo $this->Form->input('DatoPersonal.telefono_2');
         echo $this->Form->input('DatoPersonal.fecha_nacimiento', ['empty' => true, 'default' => '','minYear'=>1900,'maxYear'=>date("Y")]);
@@ -71,7 +74,8 @@
         echo $this->Form->input('DatoPersonal.alergias');
         echo $this->Form->input('DatoPersonal.institucion_seguridad');
         echo $this->Form->input('DatoPersonal.numero_afiliacion');
-        echo $this->Form->input('DatoPersonal.fotografia');
+        echo $this->Form->input('DatoPersonal.fotografia_file',['type'=>'file']);
+
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
@@ -80,6 +84,8 @@
 
 <script>
     $(document).ready(function () {
+        
+        $('#div-user').hide();
         
         $('#datopersonal-nombre').change(function(){
             $('#user-first-name').val($('#datopersonal-nombre').val());
@@ -92,6 +98,16 @@
         });
          $('#datopersonal-email').change(function(){
             $('#user-email').val($('#datopersonal-email').val());
+        });
+        
+        
+        // A mayusculas
+        $("#datopersonal-rfc").keypress(function(){
+            $(this).val( $(this).val().toUpperCase() );
+        });
+        
+        $("#datopersonal-curp").keyup(function(){
+            $(this).val( $(this).val().toUpperCase() );
         });
 
     });

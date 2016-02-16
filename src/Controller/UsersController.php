@@ -70,7 +70,6 @@ class UsersController extends AppController {
      * @return void Redirects on successful add, renders view otherwise.
      */
     public function invitar() {
-
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
 

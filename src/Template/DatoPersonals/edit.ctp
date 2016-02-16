@@ -41,7 +41,7 @@
             echo $this->Form->input('alergias');
             echo $this->Form->input('institucion_seguridad');
             echo $this->Form->input('numero_afiliacion');
-            echo $this->Form->input('fotografia');
+            echo $this->Form->input('fotografia_file');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
